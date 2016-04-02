@@ -1,0 +1,7 @@
+CHECKLIST
+
+Search box for when there is more restaurants
+
+Something to only include restaurants in that state
+
+Link near each restaurant to the original allergy
