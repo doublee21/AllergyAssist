@@ -4,4 +4,10 @@ Search box for when there is more restaurants
 
 Something to only include restaurants in that state
 
-Link near each restaurant to the original allergy
+Link near each restaurant to the original allergy menu
+
+Remove the map(IMMEDIATE)
+
+The Checkboxes are saved for that user. Also save the restaurants that person went to before;basically more accesibilty
+
+
