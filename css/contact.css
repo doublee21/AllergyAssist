@@ -1,0 +1,35 @@
+.header1 {
+  color: white;
+  text-align: center;
+  font-family: 'Satisfy', cursive;
+  font-size: 400%;
+  padding: 10px;
+  background-color: #ff4d4d;
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.p2 {
+  background-color: #ff4d4d;
+  padding: 10px;
+  font-size: 140%;
+  margin-left: 5%;
+  margin-right: 5%;
+  text-align: center;
+  color: white;
+  line-height: 170%;
+  margin-bottom: 123px;
+}
+
+@media (max-width: 600px) {
+
+.header1 {
+  width: 200px;
+  font-size: 300%;
+}
+
+}
