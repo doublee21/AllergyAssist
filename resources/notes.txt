@@ -1,0 +1,16 @@
+font-family: 'Satisfy', cursive;
+
+primary #ff4d4d
+
+mid #ff3434
+
+last #ff1a1a
+
+
+mid light #0099CC
+
+white basically #CCFFCC
+
+lightest #66CCFF
+
+dankest #003399

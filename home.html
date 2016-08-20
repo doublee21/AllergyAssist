@@ -27,123 +27,11 @@
             <meta name="msapplication-TileImage" content="img/icon/ms-icon-144x144.png">
             <meta name="theme-color" content="#ffffff">
     <title>AllergyAssist</title>
-
-          <script>
-        var map;
-
-        var InfoWindow;
-
-        var request;
-        var service;
-        var markers = [];
-
-        function initialize() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 41.8339042, lng: -88.0123518},
-                zoom: 13
-              });
-
-              var input = document.getElementById('pac-input');
-
-              var autocomplete = new google.maps.places.Autocomplete(input);
-              autocomplete.bindTo('bounds', map);
-
-              map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-              var infowindow = new google.maps.InfoWindow();
-              var marker = new google.maps.Marker({
-                map: map
-              });
-              marker.addListener('click', function() {
-                infowindow.open(map, marker);
-              });
-
-              autocomplete.addListener('place_changed', function() {
-                infowindow.close();
-                var place = autocomplete.getPlace();
-                if (!place.geometry) {
-                  return;
-                }
-
-                if (place.geometry.viewport) {
-                  map.fitBounds(place.geometry.viewport);
-                } else {
-                  map.setCenter(place.geometry.location);
-                  map.setZoom(17);
-                }
-            });
-
-                var center ={lat: 41.8339042, lng: -88.0123518};
-
-             request = {
-                location : center,
-                radius : 2000,
-                type : ['restaurant']
-            };
-            InfoWindow = new google.maps.InfoWindow();
-
-            service = new google.maps.places.PlacesService(map);
-
-            service.nearbySearch(request, callback);
-
-            google.maps.event.addListener(map, 'rightclick', function(event) {
-                map.setCenter(event.latLng)
-                clearResults(markers)
-
-                var request = {
-                    location : event.latLng,
-                    radius: 8047,
-                    types: ['restaurant']
-                };
-                service.nearbySearch(request, callback);
-            });
-
-
-
-                function callback(results, status) {
-                    if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        for (var i = 0; i <  results.length; i++) {
-                            markers.push(createMarker(results[i]));
-                        }
-                    }
-                }
-
-                function createMarker(place) {
-                    var placeLoc = place.geometry.location;
-                    var marker = new google.maps.Marker({
-                        map : map,
-                        position : place.geometry.location
-                    });
-                google.maps.event.addListener(marker, 'click', function() {
-
-                    InfoWindow.setContent(place.name);
-                    InfoWindow.open(map, this);
-                });
-                return marker;
-
-            }
-
-            function clearResults(markers) {
-                for (var m in markers) {
-                    markers[m].setMap(null)
-                    }
-                    markers  = []
-                    }
-
-
-    }
-        </script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcvRcy6eEq2xyehMNn0zxVlwh0C5yileQ
-    &libraries=places&signed_in=true&callback=initialize">
-        </script>
-        <script type="text/javascript">
-            google.maps.event.addDomListener(window, 'load', initialize);
-        </script>
-
-
   </head>
 
 <body>
+
+  <div class="page_wrap">
 
   <a href="home.html"><p class="nav_logo">AA</p></a>
   <h1 class="nav_title">Allergy Assist</h1>
@@ -159,32 +47,51 @@
         <a href=""><img class="nav_icon" src="img/twitter.png" alt="Twitter"></a>
     </nav>
 
-    <div class="nav_buff2"></div>
-  <div class="checkbox_div">
-      <p class="checkbox_desc">Check All Allergies That Apply</p>
-    <div class="checkbox_div2">
-      <form class="checkbox_form" accept-charset="UTF-8" autocomplete="off">
-        <input type=checkbox class="checkbox" id="dairy" value="0"><span class="checkbox_txt">Dairy</span><br>
-        <input type=checkbox class="checkbox" id="eggs" value="0"><span class="checkbox_txt">Eggs</span><br>
-        <input type=checkbox class="checkbox" id="peanuts" value="0"><span class="checkbox_txt">Peanuts</span><br>
-        <input type=checkbox class="checkbox" id="shellfish" value="0"><span class="checkbox_txt">Shellfish</span><br>
-        <input type=checkbox class="checkbox" id="soy" value="0"><span class="checkbox_txt">Soy</span><br>
-        <input type=checkbox class="checkbox" id="wheat" value="0"><span class="checkbox_txt">Wheat</span><br>
-        <span class="checkbox_div3"><input type="button" class="checkbox_button" value="Submit" onclick="menuDisplayItems()"></span>
-      </form>
+    <div class="divider">
+      <p class="divider_header">Step 1</p>
+        <div class="divider_divider">
+          <p class="divider_desc">What type of menu items are you looking for? <br>(Check all that apply)</p>
+          <form class="divider_form" accept-charset="UTF-8" autocomplete="off">
+            <input type="checkbox" class="divider_checkbox" id="kids" value="0"><span class="divider_checkbox_text">Kids Menu Items</span><br>
+            <input type="checkbox" class="divider_checkbox" id="adults" value="0"><span class="divider_checkbox_text">Adult Menu Items</span>
+        </div>
     </div>
-  </div>
 
-  <div class="menu">
-    <h2 class="menu_title">Meal Options</h2>
-      <div class="menu_div" id="menuDisplay">
-        <script type="text/javascript" src="js/filter.js"></script>
-      </div>
-  </div>
+    <div class="divider">
+      <p class="divider_header">Step 2</p>
+        <div class="divider_divider">
+          <p class="divider_desc">Please check all the allergies that apply to your search.</p>
+            <input type="checkbox" class="divider_checkbox" id="dairy" value="0"><span class="divider_checkbox_text">Dairy</span><br>
+            <input type="checkbox" class="divider_checkbox" id="eggs" value="0"><span class="divider_checkbox_text">Eggs</span><br>
+            <input type="checkbox" class="divider_checkbox" id="peanuts" value="0"><span class="divider_checkbox_text">Peanuts</span><br>
+            <input type="checkbox" class="divider_checkbox" id="shellfish" value="0"><span class="divider_checkbox_text">Shellfish</span><br>
+            <input type="checkbox" class="divider_checkbox" id="soy" value="0"><span class="divider_checkbox_text">Soy</span><br>
+            <input type="checkbox" class="divider_checkbox" id="wheat" value="0"><span class="divider_checkbox_text">Wheat</span>
+        </div>
+    </div>
 
-  <input id="pac-input" class="controls" type="text"
-            placeholder="Enter a location">
-        <div id="map"></div>
+    <div class="divider">
+      <p class="divider_header">Step 3</p>
+        <div class="divider_divider">
+          <p class="divider_desc">Please search and select the restaurants you would like to look at.</p>
+            <span class="divider_search_div"><img class="divider_search_img" alt="search" src="img/search.png"><input class="divider_search" type="text" placeholder="Search Restaurants Here..."></span>
+              <span class="divider_button_div"><input type="button" class="divider_button" value="Update"></span>
+          </form>
+        </div>
+    </div>
+
+    <div class="divider">
+      <p class="divider_header">Results</p>
+        <div class="divider_divider">
+          <p class="divider_desc">Here are the menu items you can eat based on what you selected.</p>
+        </div>
+    </div>
+
+    <div class="note_div">
+      <p class="note_txt"><i>This information is based on online published allergy information from the restaurants or allergen menus submitted to us, any <b>sudden changes or inaccuracies are possible,</b> so always confirm details with the restaurant to be completely safe.</i></p>
+    </div>
+
+  </div>
 
   <footer>
     <a href="home.html"><img src="img/logo.png" alt="Logo" class="footer_logo"></a>
@@ -194,8 +101,10 @@
           <li class="footer_item"><a class="footer_link" href="about.html">About</a></li>
           <li class="footer_item"><a class="footer_link" href="contact.html">Contact</a></li>
         </ul>
-          <a href=""><img class="footer_icon" src="img/google.png" alt="Google"></a>
-          <a href=""><img class="footer_icon" src="img/twitter.png" alt="Twitter"></a>
+          <div class="footer_div">
+            <a href=""><img class="footer_icon" src="img/google.png" alt="Google"></a>
+            <a href=""><img class="footer_icon" src="img/twitter.png" alt="Twitter"></a>
+          </div>
   </footer>
 
 </body>
